@@ -16,9 +16,6 @@
    ```
 3. 下载官方预训练权重 `xd_best.pth`，放入自动生成的 `StreamVAD/weights/` 文件夹
 
-以下是修正格式后的内容，已修复代码块、步骤编号及缩进问题：
-
-```markdown
 ## 运行检测
 
 ### 方式 1：本地摄像头检测
@@ -72,7 +69,6 @@ python realtime_inference.py
 ```bash
 cd StreamVAD
 python realtime_inference.py
-```
 ```
 
 ## 简单参数调整
