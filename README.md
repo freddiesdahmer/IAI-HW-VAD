@@ -16,44 +16,64 @@
    ```
 3. 下载官方预训练权重 `xd_best.pth`，放入自动生成的 `StreamVAD/weights/` 文件夹
 
+以下是修正格式后的内容，已修复代码块、步骤编号及缩进问题：
+
+```markdown
 ## 运行检测
+
 ### 方式 1：本地摄像头检测
-bash
-运行
+
+运行以下命令：
+
+```bash
 cd StreamVAD
 python realtime_inference.py
-窗口实时显示视频和异常分数
-分数超过 0.5 时画面变红并提示异常
-按 q 键退出程序
+```
+
+- 窗口会实时显示视频和异常分数
+- 当分数超过 0.5 时，画面变红并提示异常
+- 按 `q` 键退出程序
 
 ### 方式 2：本地视频文件检测
 
-1. 修改 realtime_input.py
-找到 RealtimeVideoStream 类的 __init__ 方法，新增一行获取视频原帧率：
-python
-运行
-def __init__(self, source=0, clip_length=16, frame_interval=1):
-    self.source = source
-    self.clip_length = clip_length
-    self.frame_interval = frame_interval
-    self.cap = cv2.VideoCapture(source)
-    self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 2)
-    self.cap.set(cv2.CAP_PROP_FPS, 30)  # 原有代码保留，新增下面这行
-    self.fps = self.cap.get(cv2.CAP_PROP_FPS)
-    self.frame_buffer = []
-    self.running = False
-   
-3. 修改 realtime_inference.py
-找到视频源配置行，替换为你的视频文件路径：
-VIDEO_SOURCE = "./test_video.mp4"
+1. **修改 `realtime_input.py`**  
+   找到 `RealtimeVideoStream` 类的 `__init__` 方法，新增一行获取视频原帧率：
 
-4. 调整播放速度
-找到主循环末尾的退出判断行，替换为：
-wait_time = int(1000 / video_stream.fps) if video_stream.fps > 0 else 1
-if cv2.waitKey(wait_time) & 0xFF == ord('q'):
+   ```python
+   def __init__(self, source=0, clip_length=16, frame_interval=1):
+       self.source = source
+       self.clip_length = clip_length
+       self.frame_interval = frame_interval
+       self.cap = cv2.VideoCapture(source)
+       self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 2)
+       self.cap.set(cv2.CAP_PROP_FPS, 30)  # 原有代码保留，新增下面这行
+       self.fps = self.cap.get(cv2.CAP_PROP_FPS)
+       self.frame_buffer = []
+       self.running = False
+   ```
 
-运行命令和摄像头模式完全一致：
+2. **修改 `realtime_inference.py`**  
+   找到视频源配置行，替换为你的视频文件路径：
+   ```python
+   VIDEO_SOURCE = "./test_video.mp4"
+   ```
+
+3. **调整播放速度**  
+   找到主循环末尾的退出判断行，替换为：
+
+   ```python
+   wait_time = int(1000 / video_stream.fps) if video_stream.fps > 0 else 1
+   if cv2.waitKey(wait_time) & 0xFF == ord('q'):
+       break
+   ```
+
+运行命令与摄像头模式完全一致：
+
+```bash
+cd StreamVAD
 python realtime_inference.py
+```
+```
 
 ## 简单参数调整
 修改 `realtime_inference.py` 即可：
