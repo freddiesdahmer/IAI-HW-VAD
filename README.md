@@ -17,7 +17,7 @@
 3. 下载官方预训练权重 `xd_best.pth`，放入自动生成的 `StreamVAD/weights/` 文件夹
 
 ## 运行检测
-方式 1：本地摄像头检测
+### 方式 1：本地摄像头检测
 bash
 运行
 cd StreamVAD
@@ -26,7 +26,7 @@ python realtime_inference.py
 分数超过 0.5 时画面变红并提示异常
 按 q 键退出程序
 
-方式 2：本地视频文件检测
+### 方式 2：本地视频文件检测
 
 1. 修改 realtime_input.py
 找到 RealtimeVideoStream 类的 __init__ 方法，新增一行获取视频原帧率：
@@ -38,8 +38,7 @@ def __init__(self, source=0, clip_length=16, frame_interval=1):
     self.frame_interval = frame_interval
     self.cap = cv2.VideoCapture(source)
     self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 2)
-    self.cap.set(cv2.CAP_PROP_FPS, 30)  # 原有代码保留
-    # 新增下面这行
+    self.cap.set(cv2.CAP_PROP_FPS, 30)  # 原有代码保留，新增下面这行
     self.fps = self.cap.get(cv2.CAP_PROP_FPS)
     self.frame_buffer = []
     self.running = False
