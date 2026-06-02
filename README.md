@@ -1,4 +1,3 @@
-下面是将两份文档合并后的统一文件，去除了重复内容，理顺了结构，并保留了所有关键信息：
 ---
 # StreamVAD 一键部署工具 & StreamVAD-XL 改进版本
 基于 [StreamVAD](https://github.com/Han-lijun/StreamVAD) 的课程作业部署脚本，自动完成环境配置、依赖安装与代码生成，实现本地摄像头或视频文件的实时异常检测。  
